@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <title>Formulir Tambah Produk</title>
+  </head>
+  <style>
+    fieldset {
+      width: 370px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .alert-success {
+      border: 1px solid rgb(214, 233, 198);
+      background-color: rgb(223, 240, 216);
+      color: rgb(70, 136, 71);
+    }
+
+    select {
+      width: 260px;
+    }
+
+    .input-row {
+      width: 251px;
+    }
+
+    .input-row2 {
+      width: 120px;
+    }
+
+    .textarea-row {
+      width: 253px;
+      height: 100px;
+    }
+  </style>
+  <body onload="generateCaptcha()">
+    <form action="javascript:;" id="form" name="form" onsubmit="return validateForm()">
+      <fieldset>
+        <div id="sukses"></div>
+        <legend>
+          <h2>Formulir Tambah Produk</h2>
+        </legend>
+        <table>
+          <tr>
+            <td>Nama Produk</td>
+            <td>:</td>
+            <td>
+              <input class="input-row" type="text" id="namaProduk" minlength="5" maxlength="30">
+            </td>
+          </tr>
+          <tr>
+            <td>Deskripsi</td>
+            <td>:</td>
+            <td>
+              <textarea class="textarea-row" type="text" id="deskripsi" minlength="5" maxlength="100"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>Kategori</td>
+            <td>:</td>
+            <td>
+              <select id="kategori" onchange="dropdownlist(this.options[this.selectedIndex].value);">
+                <option value="">Pilih Kategori</option>
+                <option value="Baju">Baju</option>
+                <option value="Elektronik">Elektronik</option>
+                <option value="Alat Tulis">Alat Tulis</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Sub Kategori</td>
+            <td>:</td>
+            <td>
+              <select id="subKategori">
+                <option value="">Pilih Sub Kategori</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Harga Satuan</td>
+            <td>:</td>
+            <td>
+              <input class="input-row" type="number" id="hargaSatuan">
+            </td>
+          </tr>
+          <tr>
+            <td>Grosir</td>
+            <td>:</td>
+            <td>
+              <input class="radio" type="radio" name="grosir" value="Ya" onchange="disable()">Ya <br />
+              <input class="radio" type="radio" name="grosir" value="Tidak" onchange="disable()">Tidak
+            </td>
+          </tr>
+          <tr>
+            <td>Harga Grosir</td>
+            <td>:</td>
+            <td>
+              <input class="input-row" type="number" id="hargaGrosir">
+            </td>
+          </tr>
+          <tr>
+            <td>Jasa Kirim</td>
+            <td>:</td>
+            <td>
+              <input class="radio" type="checkbox" name="jasaKirim[]" value="JNT">JNT <br />
+              <input class="radio" type="checkbox" name="jasaKirim[]" value="TIKI">TIKI <br />
+              <input class="radio" type="checkbox" name="jasaKirim[]" value="SiCepat">SiCepat <br />
+              <input class="radio" type="checkbox" name="jasaKirim[]" value="Ninja Express">Ninja Express <br />
+              <input class="radio" type="checkbox" name="jasaKirim[]" value="Wahana">Wahana <br />
+            </td>
+          </tr>
+          <tr>
+            <td>Captcha</td>
+            <td>:</td>
+            <td>
+              <input class="input-row2" type="text" id="cGenerate" disabled>
+              <input class="input-row2" type="text" id="cInput">
+            </td>
+          </tr>
+        </table>
+        <center>
+          <br>
+          <button class="button" type="submit">Submit</button>&nbsp; 
+          <button class="button" type="reset">Reset</button>
+        </center>
+      </fieldset>
+    </form>
+  </body>
+  <script type="text/javascript">
+    function validateForm() {
+      if (document.forms["form"]["namaProduk"].value == "") {
+        alert("Error! Masukkan nama produk.");
+        document.forms["form"]["namaProduk"].focus();
+        return false;
+      }
+      if (document.forms["form"]["deskripsi"].value == "") {
+        alert("Error! Masukkan deskripsi.");
+        document.forms["form"]["deskripsi"].focus();
+        return false;
+      }
+      if (document.forms["form"]["subKategori"].value == "") {
+        alert("Error! Pilih sub kategori.");
+        document.forms["form"]["subKategori"].focus();
+        return false;
+      }
+      if (document.forms["form"]["hargaSatuan"].value == "") {
+        alert("Error! Masukkan harga satuan.");
+        document.forms["form"]["hargaSatuan"].focus();
+        return false;
+      } else if (isNaN(document.forms["form"]["hargaSatuan"].value)) {
+        alert("Error! Harga satuan harus angka.");
+        document.forms["form"]["hargaSatuan"].value = "";
+        document.forms["form"]["hargaSatuan"].focus();
+        return false;
+      }
+      if (document.forms["form"]["grosir"].value == "") {
+        alert("Error! Pilih grosir (ya/tidak).");
+        return false;
+      }
+      if (document.forms["form"]["grosir"].value == "Ya" && document.forms["form"]["hargaGrosir"].value == "") {
+          alert("Error! Masukkan harga grosir.");
+          document.forms["form"]["hargaGrosir"].focus();
+        return false;
+      }
+      var jasaKirim = document.forms["form"]["jasaKirim[]"];
+      var count = 0;
+      for (var i = 0; i < jasaKirim.length; i++) {
+        var el = jasaKirim[i];
+        if (el.checked) {
+          count++;
+        }
+      }
+      if (count < 3) {
+        alert("Error! Pilih minimal 3 jasa kirim.");
+        document.forms["form"]["jasaKirim"].focus();
+        return false;
+      }
+      if (document.forms["form"]["cInput"].value != document.forms["form"]["cGenerate"].placeholder) {
+        alert("Error! Masukkan chaptha dengan benar.");
+        generateCaptcha();
+        return false;
+      }
+      if (confirm("Info! Ingin menambahkan data?")) {
+        document.getElementById("sukses").innerHTML = "<center class='alert-success'><strong>Sukses!</strong> Data berhasil ditambahkan</center><hr>";
+        window.setTimeout(function(){location.reload(true)},6000)
+      } else {
+        return false;
+      }
+      return true;
+    }
+
+    function disable() {
+      if (document.forms["form"]["grosir"].value == "Tidak") {
+        document.forms["form"]["hargaGrosir"].disabled = true;
+        document.forms["form"]["hargaGrosir"].value = "";
+        return false;
+      }
+      if (document.forms["form"]["grosir"].value == "Ya") {
+        document.forms["form"]["hargaGrosir"].disabled = false;
+        return false;
+      }
+    }
+
+    function dropdownlist(listindex) {
+      document.form.subKategori.options.length = 0;
+      switch (listindex) {
+        case "Baju":
+          document.form.subKategori.options[0] = new Option("Baju Pria", "Baju Pria");
+          document.form.subKategori.options[1] = new Option("Baju Wanita", "Baju Wanita");
+          document.form.subKategori.options[2] = new Option("Baju Anak", "Baju Anak");
+          break;
+        case "Elektronik":
+          document.form.subKategori.options[0] = new Option("Mesin Cuci", "Mesin Cuci");
+          document.form.subKategori.options[1] = new Option("Kulkas", "Kulkas");
+          document.form.subKategori.options[2] = new Option("AC", "AC");
+          break;
+        case "Alat Tulis":
+          document.form.subKategori.options[0] = new Option("Kertas", "Kertas");
+          document.form.subKategori.options[1] = new Option("Map", "Map");
+          document.form.subKategori.options[2] = new Option("Pulpen", "Pulpen");
+          break;
+        default:
+          document.form.subKategori.options[0] = new Option("Pilih Sub Kategori");
+          break;
+      }
+      return true;
+    }
+
+    function generateCaptcha() {
+      var characters = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+      var randomstring = '';
+      for (var i = 0; i < 5; i++) {
+        var rnum = Math.floor(Math.random() * characters.length);
+        randomstring += characters.charAt(rnum);
+      }
+      document.forms["form"]["cGenerate"].placeholder = randomstring;
+    }
+  </script>
+</html>
