@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">MyViewAndViews</string>
+    <string name="content_text">Oppo A31 is a smartphone with a 6.5-inch screen with a resolution of 720x1600 pixels. The screen has a 20:9 aspect ratio and a 90Hz refresh rate. The phone is powered by a MediaTek Helio P35 processor and has 4GB of RAM. The internal storage is 128GB and can be expanded via microSD card. The phone has a 5000mAh battery and supports 18W fast charging. The phone has a 13MP + 2MP + 2MP + 2MP rear camera and a 8MP front camera. The phone runs on Android 10 and has a side-mounted fingerprint sensor.</string>
+    <string name="content_specs_display">Type IPS LCD, 480 nits (typ)
+        Size 6.5 inches, 102.0 cm2 (~82.4% screen-to-body ratio)
+        Resolution 720 x 1600 pixels, 20:9 ratio (~270 ppi density)
+        Protection Corning Gorilla Glass 3</string>
+    <string name="content_specs_size">Dimensions 163.9 x 75.5 x 8.3 mm (6.45 x 2.97 x 0.33 in)
+        Weight 180 g (6.35 oz)
+        Build Glass front (Gorilla Glass 3), plastic back, plastic frame
+        SIM Dual SIM (Nano-SIM, dual stand-by)</string>
+    <string name="content_specs_camera">Triple 12 MP, f/1.8, (wide), 1/2.86", 1.25µm, PDAF2 MP, f/2.4, (macro)2 MP, f/2.4, (depth)Features LED flash, HDR, panoramaVideo 1080p@30fpsSelfie camera Single 8 MP, f/2.0, (wide), 1/4.0", 1.12µm
+     Features HDR
+     Video 1080p@30fps
+     Sound Loudspeaker Yes
+     3.5mm jack Yes</string>
+    <string name="stock">Stock hanya 1 buah</string>
+    <string name="specification">Spesifikasi</string>
+    <string name="display">Display</string>
+    <string name="size">Size</string>
+    <string name="camera">Camera</string>
+    <string name="seller">Dijual oleh</string>
+    <string name="my_name">Danang Wisnu Prayoga</string>
+    <string name="cs">Hubungi CS</string>
+    <string name="buy">Beli</string>
+    <string name="dummy_value">Rp1.539.000</string>
+    <string name="dummy_photos">6 photos</string>
+    <string name="back">Kembali</string>
+    <string name="succes_message">Produk telah berhasil dibeli</string>
+</resources>
